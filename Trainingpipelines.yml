@@ -5,10 +5,7 @@ trigger:
 pool:
   name: 'Azure Pipelines'
 
-stages:
-  - stage: Show
-    
-    jobs:
+jobs:
       - job: Show
         steps:
           - script: echo "Hello World"

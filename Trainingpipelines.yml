@@ -2,12 +2,25 @@
 trigger:
 - main
 
-
-
 jobs:
-      - job: Show
-        pool:
-          name: 'Azure Pipelines'
-        steps:
-          - script: echo "Hello World"
+- job: BuildJob
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo "Building..."
+
+- job: TestJob1
+  dependsOn: BuildJob
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo "Running tests..."
+
+- job: TestJob2
+  dependsOn: TestJob1
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo "Running more tests..."
+
 

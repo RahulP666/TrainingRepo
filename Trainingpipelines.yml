@@ -2,11 +2,12 @@
 trigger:
 - main
 
-pool:
-  name: 'Azure Pipelines'
+
 
 jobs:
       - job: Show
+        pool:
+          name: 'Azure Pipelines'
         steps:
           - script: echo "Hello World"
 

@@ -6,10 +6,35 @@
 trigger:
 - main
 
-pool:
-  vmImage: windows-latest
+jobs:
+  - job: WindowsTest
+    displayName: "Testing on Windows VM"
+    pool:
+     name: default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+    steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your PowerShell commands here.
+            
+            Write-Host "Start Windows Test"
+            Start-Sleep -Seconds 120
+            Write-Host "Stop Windows Test"
 
+  - job: LinuxTest
+    displayName: "Testing on Linux VM"
+    pool:
+     name: default
+
+    steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your PowerShell commands here.
+            
+            Write-Host "Start Linux Test"
+            Start-Sleep -Seconds 120
+            Write-Host "Stop Windows Test"

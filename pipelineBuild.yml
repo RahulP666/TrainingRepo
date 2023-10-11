@@ -32,15 +32,21 @@ stages:
 
       inputs:
         packageType: 'sdk'
-        version: '5.1.x'
+        version: '6.1.x'
         
     - task: NuGetCommand@2
       inputs:
         command: 'restore'
         restoreSolution: '$(solution)'
         feedsToUse: 'select'
+
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '$(solution)'
+        arguments: '--output $(outputDirectory)'
     
-    - script: dotnet build $(solution) --output $(outputDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:

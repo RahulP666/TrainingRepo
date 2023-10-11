@@ -54,3 +54,22 @@ stages:
         artifactName: 'drop'
         publishLocation: 'Container'
 
+- stage: Publish
+  jobs:
+  - job: Publish
+    displayName: 'Publish Job'
+    dependsOn: Build
+
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '5.x'
+
+    - script: dotnet publish $(solution) --output $(Build.ArtifactStagingDirectory)/published
+      displayName: 'Publish .NET Application'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/published'
+        artifact: 'published'

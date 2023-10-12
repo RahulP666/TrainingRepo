@@ -72,7 +72,13 @@ stages:
       displayName: 'Publish .NET Application'
     
     
-
+    - task: NuGetCommand@2
+        inputs:
+          command: 'pack'
+          packagesToPack: '$(project)'
+          configuration: '$(buildConfiguration)'
+          packDestination: '$(outputDirectory)'
+          versioningScheme: 'off':
       
     - task: NuGetCommand@2
       inputs:

@@ -1,0 +1,10 @@
+steps:
+- script: echo "Deploy to Windows Service"
+  displayName: "Windows Service Deploy"
+
+ 
+- script: echo "Deploy to IIS Service"
+  displayName: "IIS Service Deploy"
+ 
+- script: echo "Deploy to Databse"
+  displayName: "Database Deploy"

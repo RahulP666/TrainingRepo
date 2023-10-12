@@ -1,0 +1,23 @@
+    parameters: 
+    - name: Env
+      default: Dev
+       
+    jobs: 
+      - job: 'DeployWindowservice'
+
+        steps:
+        - script: echo "Deploy to Windows Service ${{ parameters.Env }}"
+          displayName: "Windows Service Deploy"
+
+      - job: 'DeploytoIISService'
+
+        steps:
+         - script: echo "IIS Service Deploy ${{ parameters.Env }}"
+        displayName: "IIS Service Deploy"
+
+      - job: 'DeploytoDatabse'
+
+        steps:
+          - script: echo "Deploy to Database ${{ parameters.Env }}"
+            displayName: "Deploy to Database"
+     

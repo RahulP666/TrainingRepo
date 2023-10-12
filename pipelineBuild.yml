@@ -21,6 +21,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   outputDirectory: 'PublishOut'
+  project: 'MVCTraining/MVCTraining.sln'
 
 stages: 
 - stage: Build
@@ -45,6 +46,7 @@ stages:
       inputs:
         command: 'build'
         projects: '$(solution)'
+
         arguments: '--output $(outputDirectory)'
     
 
@@ -68,9 +70,15 @@ stages:
 
     - script: dotnet publish $(solution) --output $(Build.ArtifactStagingDirectory)/published
       displayName: 'Publish .NET Application'
+    
+    - task: NuGetPackager@0
+      inputs:
+        searchPattern: '$(project)'
+        outputdir: '$(outputDirectory)'
+        versionByBuild: 'false'
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/published'
+        targetPath: '$(outputDirectory)\*.nupkg'
         artifact: 'test'
         publishLocation: 'pipeline'

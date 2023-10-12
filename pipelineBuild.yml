@@ -71,14 +71,24 @@ stages:
     - script: dotnet publish $(solution) --output $(Build.ArtifactStagingDirectory)/published
       displayName: 'Publish .NET Application'
     
-    - task: NuGetPackager@0
+    
+    - task: NuGetCommand@2
       inputs:
-        searchPattern: '$(project)'
-        outputdir: '$(outputDirectory)'
-        versionByBuild: 'false'
-
-    - task: PublishPipelineArtifact@1
+        command: 'restore'
+        restoreSolution: '$(solution)'
+        feedsToUse: 'select'
+        vstsFeed: '9aa9fdcc-a1cd-4f23-9cad-71a7394e6809'
+        includeNuGetOrg: false
+      
+    - task: NuGetCommand@2
       inputs:
-        targetPath: '$(outputDirectory)\*.nupkg'
-        artifact: 'test'
-        publishLocation: 'pipeline'
+        command: 'push'
+        packagesToPush: '$(outputDirectory)/**/*.nupkg;!$(outputDirectory)/**/*.symbols.nupkg'
+        nuGetFeedType: 'internal'
+        publishVstsFeed: '9aa9fdcc-a1cd-4f23-9cad-71a7394e6809'
+        allowPackageConflicts: true
+#    - task: PublishPipelineArtifact@1
+#      inputs:
+#        targetPath: '*.nupkg'
+#        artifact: 'test'
+#        publishLocation: 'pipeline'

@@ -4,12 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
- paths:
-   include: 
-    - MVCTraining/*
- branches:
-  include:
-    - main
+  none
+#  paths:
+#    include: 
+#     - MVCTraining/*
+#  branches:
+#   include:
+#     - main
 
 
 

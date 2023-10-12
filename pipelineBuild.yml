@@ -73,12 +73,12 @@ stages:
     
     
     - task: NuGetCommand@2
-        inputs:
+      inputs: 
           command: 'pack'
           packagesToPack: '$(project)'
           configuration: '$(buildConfiguration)'
           packDestination: '$(outputDirectory)'
-          versioningScheme: 'off':
+          versioningScheme: 'off'
       
     - task: NuGetCommand@2
       inputs:

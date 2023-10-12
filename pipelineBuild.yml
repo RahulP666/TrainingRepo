@@ -72,20 +72,14 @@ stages:
       displayName: 'Publish .NET Application'
     
     
-    - task: NuGetCommand@2
-      inputs:
-        command: 'restore'
-        restoreSolution: '$(solution)'
-        feedsToUse: 'select'
-        vstsFeed: '9aa9fdcc-a1cd-4f23-9cad-71a7394e6809'
-        includeNuGetOrg: false
+
       
     - task: NuGetCommand@2
       inputs:
         command: 'push'
         packagesToPush: '$(outputDirectory)/**/*.nupkg;!$(outputDirectory)/**/*.symbols.nupkg'
         nuGetFeedType: 'internal'
-        publishVstsFeed: '9aa9fdcc-a1cd-4f23-9cad-71a7394e6809'
+        publishVstsFeed: '89c8f2c4-5987-4092-848b-a5db4f97daa5/6d27ffef-1008-434f-a180-008f1337df6f'
         allowPackageConflicts: true
 #    - task: PublishPipelineArtifact@1
 #      inputs:

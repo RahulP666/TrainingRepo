@@ -21,7 +21,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   outputDirectory: 'PublishOut'
-  project: 'MVCTraining/MVCTraining.sln'
+  project: 'MVCTraining/MVCTraining.csproj'
 
 stages: 
 - stage: Build

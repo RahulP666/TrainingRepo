@@ -51,14 +51,6 @@ stages:
         arguments: '--output $(outputDirectory)'
     
 
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathtoPublish: $(outputDirectory)
-        artifactName: 'drop'
-        publishLocation: 'Container'
-
-- stage: Publish
-  jobs:
   - job: Publish
     displayName: 'Publish Job'
     #dependsOn: Build

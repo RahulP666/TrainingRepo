@@ -61,7 +61,7 @@ stages:
         packageType: 'sdk'
         version: '5.x'
 
-    - script: dotnet publish $(solution) --output $(outputDirectory)/published
+    - script: dotnet publish $(solution) --output $(outputDirectory)/published --configuration $(buildConfiguration)
       displayName: 'Publish .NET Application'
     
     

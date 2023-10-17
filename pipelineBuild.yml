@@ -53,7 +53,7 @@ stages:
 
   - job: Publish
     displayName: 'Publish Job'
-    #dependsOn: Build
+    dependsOn: Build
 
     steps:
     - task: UseDotNet@2

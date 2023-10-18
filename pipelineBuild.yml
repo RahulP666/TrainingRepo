@@ -66,12 +66,16 @@ stages:
     
     
     - task: NuGetCommand@2
-      inputs: 
-          command: 'pack'
-          packagesToPack: '$(project)'
-          configuration: '$(buildConfiguration)'
-          packDestination: '$(outputDirectory)'
-          versioningScheme: 'off'
+      inputs:
+        command: 'pack'
+        packagesToPack: '$(project)'
+        configuration: '$(buildConfiguration)'
+        packDestination: '$(outputDirectory)'
+        versioningScheme: 'byPrereleaseNumber'
+        majorVersion: '1'
+        minorVersion: '0'
+        patchVersion: '1'
+
       
     - task: NuGetCommand@2
       inputs:

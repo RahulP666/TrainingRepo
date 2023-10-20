@@ -35,14 +35,13 @@ steps:
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '--output $(outputDirectory) -c $(buildConfiguration))'
+    arguments: '--output $(outputDirectory)'
 
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
     packagesToPack: '$(project)'
-    configuration: '$(buildConfiguration)'
-    packDestination: '$(outputDirectory)'''
+    packDestination: '$(outputDirectory)'
     versioningScheme: 'byPrereleaseNumber'
     majorVersion: '1'
     minorVersion: '0'

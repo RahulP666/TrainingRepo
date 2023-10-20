@@ -1,0 +1,56 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+ solution: 'AzureTrainingClassLibrary/AzureTrainingClassLibrary.sln'
+ buildPlatform: 'Any CPU'
+ buildConfiguration: 'Release'
+ outputDirectory: 'PublishOut'
+ project: 'AzureTrainingClassLibrary/AzureTrainingClassLibrary.csproj'
+
+
+steps: 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '5.x'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: '89c8f2c4-5987-4092-848b-a5db4f97daa5/3b028b89-5e0a-4e74-86fb-bd8fb05c117f'
+  
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--output $(outputDirectory)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '$(project)'
+    configuration: '$(buildConfiguration)'
+    packDestination: '$(outputDirectory)'''
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '1'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(outputDirectory)/**/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '89c8f2c4-5987-4092-848b-a5db4f97daa5/3b028b89-5e0a-4e74-86fb-bd8fb05c117f'

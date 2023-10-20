@@ -41,11 +41,12 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '$(project)'
-    packDestination: '$(outputDirectory)'
+    packDestination: '$(outputDirectory) versioningScheme:'
     versioningScheme: 'byPrereleaseNumber'
     majorVersion: '1'
     minorVersion: '0'
-    patchVersion: '1'
+    patchVersion: '0'
+
 
 - task: NuGetCommand@2
   inputs:

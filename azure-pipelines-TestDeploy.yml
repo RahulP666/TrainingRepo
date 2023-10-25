@@ -57,8 +57,10 @@ stages:
     displayName: 'Deploy to Azure Web App'
     steps:
   
-    - download: current
+    - downloadBuild: current
       artifact: 'drop'
+      path: '$(Build.ArtifactStagingDirectory)'    
+       
       
 
     - task: AzureWebApp@1

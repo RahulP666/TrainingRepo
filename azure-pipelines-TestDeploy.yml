@@ -24,6 +24,12 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '5.x'
+    
+    - task: NuGetCommand@2
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(solution)'
+        feedsToUse: 'select'
 
     - task: DotNetCoreCLI@2
       inputs:

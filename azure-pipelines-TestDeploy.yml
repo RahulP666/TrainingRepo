@@ -52,14 +52,14 @@ stages:
     displayName: 'Deploy to Azure Web App'
     steps:
   
-    - downloadBuild: current
+    - download: current
       artifact: 'drop'
-      path: $(System.ArtifactsDirectory)/app
+      
 
     - task: AzureWebApp@1
       inputs:
-        azureSubscription: $(azureSubscription)
+        azureSubscription: 'Free Trial(03111732-4a2b-4276-9b78-32e49c83ac59)'
         appType: 'webApp'
-        appName: $(azureWebAppName)
-        package: $(System.ArtifactsDirectory)/app/**/*.zip
+        appName: 'MVCTrainWebapp'
+        package: '$(System.ArtifactsDirectory)/**/*.zip'
         deploymentMethod: 'auto'

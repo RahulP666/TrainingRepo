@@ -57,9 +57,9 @@ stages:
     displayName: 'Deploy to Azure Web App'
     steps:
   
-    - downloadBuild: current
+    - download: current
       artifact: 'drop'
-      path: '$(Build.ArtifactStagingDirectory)'    
+         
        
       
 
@@ -68,5 +68,5 @@ stages:
         azureSubscription: 'Free Trial(03111732-4a2b-4276-9b78-32e49c83ac59)'
         appType: 'webApp'
         appName: 'MVCTrainWebapp'
-        package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+        package: '**/*.zip'
         deploymentMethod: 'auto'

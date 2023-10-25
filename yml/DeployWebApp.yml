@@ -8,7 +8,58 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  solution: 'MVCTraining/MVCTraining.sln'
+  buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
+  buildOutput: 'Out'
+
 stages:
   - stage: Build
+    jobs:
+      - job: Build
+        displayName: 'Build and Publish'
+        
+        steps:
+        
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '5.x'
+        - task: NuGetCommand@2
+          inputs:
+            command: 'restore'
+            restoreSolution: '$(solution)'
+            feedsToUse: 'select'
+            vstsFeed: '89c8f2c4-5987-4092-848b-a5db4f97daa5/3b028b89-5e0a-4e74-86fb-bd8fb05c117f'
+      
+
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: 'build'
+            projects: '$(solution)'
+            arguments: '-c $(buildConfiguration)'
+        
+
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: 'publish'
+            publishWebProjects: true
+            arguments: '-c $(buildConfiguration)'' --output $(Build.ArtifactStagingDirectory)'
+        
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'drop'
+            publishLocation: 'pipeline'
+         
+   
     
   - stage: Deploy
+    jobs:
+      - job: Deploy
+        displayName: "Deploy to Web App Created on Azure"
+        steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+             

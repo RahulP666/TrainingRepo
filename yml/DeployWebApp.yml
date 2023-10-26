@@ -62,4 +62,19 @@ stages:
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              itemPattern: '**/*.zip'
+              downloadPath: '$(buildOutput)'
+              cleanDestinationFolder: true
+          
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'Free Trial(03111732-4a2b-4276-9b78-32e49c83ac59)'
+              appType: 'webApp'
+              appName: 'AzTrainingWebApp'
+              package: '$(buildOutput)/**/*.zip'
+              deploymentMethod: 'auto'
+          
              

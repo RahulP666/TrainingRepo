@@ -12,7 +12,7 @@ variables:
   solution: 'MVCTraining/MVCTraining.sln'
   buildConfiguration: 'Release'
   buildPlatform: 'Any CPU'
-  buildOutput: 'Out'
+  buildOutput: 'Output'
 
 stages:
   - stage: Build

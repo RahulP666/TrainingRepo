@@ -73,7 +73,7 @@ stages:
             inputs:
               azureSubscription: 'Free Trial(03111732-4a2b-4276-9b78-32e49c83ac59)'
               appType: 'webApp'
-              appName: 'AzTrainingWebApp'
+              appName: 'WebAppServ1'
               package: '$(buildOutput)/**/*.zip'
               deploymentMethod: 'auto'
           
